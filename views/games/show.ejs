@@ -1,0 +1,63 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <!-- SIDE BAR -->
+        <div class="col-md-3">
+            <p class="lead">GamesYelp</p>
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="card">
+                <!-- GAME DETAILS -->
+                <img class = "card-img-top" src = "<%= game.image %>">
+                <div class="card-body">
+                    <h4 class = "card-title"><a><%= game.name %></a></h4>
+                    <p class = "card-text"><%= game.description %></p>
+                    <p class = "card-text"><em>Submitted by <%= game.author.username %></em></p>
+                    
+                    <% if(currentUser && game.author.id.equals(currentUser._id)){ %>
+                        <a class = "btn btn-sm btn-warning card-link" href="/games/<%= game._id %>/edit">Edit</a>
+                        <form class = "d-inline-flex" action = "/games/<%= game._id %>?_method=DELETE" method = "POST">
+                            <div class="form-group">
+                                <button class = "btn btn-sm btn-danger card-link">Delete</button>     
+                            </div>
+                        </form>
+                    <% } %>
+                </div>
+                <!-- COMMENTS SECTION -->
+                <div class="card-footer">
+                    <div class = "text-right"><a class = "btn btn-success card-link" href="/games/<%= game._id %>/comments/new">Add Comment</a></div>
+                    
+                    <% game.comments.forEach(function(comment){ %>
+                        <div class="row align-items-start">
+                            <div class = "col-md-10 card-text">
+                                <strong><%= comment.author.username %></strong> - <%= comment.text %>
+                            </div>
+                            <div class = "col-md-2 card-text">
+                                <%= comment.created.toDateString() %>
+                            </div>
+
+                            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                <a href="/games/<%= game._id %>/comments/<%= comment._id %>/edit" class="btn btn-sm btn-warning card-link">
+                                    Edit
+                                </a>
+                                <form class = "d-inline-flex" action = "/games/<%= game._id %>/comments/<%= comment._id %>?_method=DELETE" method = "POST">
+                                    <div class="form-group">
+                                        <button class = "btn btn-sm btn-danger card-link">Delete</button>     
+                                    </div>
+                                </form>
+                            <% } %>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% include ../partials/footer %>
