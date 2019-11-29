@@ -9,9 +9,7 @@ var express        = require("express"),
     methodOverride = require("method-override");
 
 //LOCAL MODULES
-var Game    = require("./models/game"),
-    Comment = require("./models/comment"),
-    User    = require("./models/user"),
+var User    = require("./models/user"),
     seedDB  = require("./seeds");
 
 //APP CONFIG

@@ -6,7 +6,7 @@ var User = require("../models/user");
 
 //ROOT ROUTE
 router.get("/", function(req, res){
-    res.render("landing");
+    res.redirect("/games");
 });
 
 //AUTHENTICATION ROUTES
