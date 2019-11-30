@@ -1,7 +1,9 @@
+//EXTERNAL MODULES
 var express  = require("express"),
     router   = express.Router(),
     passport = require("passport");
 
+//LOCAL MODULES
 var User = require("../models/user");
 
 //ROOT ROUTE

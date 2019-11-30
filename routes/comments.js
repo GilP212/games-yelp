@@ -1,6 +1,8 @@
+//EXTERNAL MODULES
 var express = require("express");
     router  = express.Router({mergeParams: true});
 
+//LOCAL MODULES
 var Game       = require("../models/game"),
     Comment    = require("../models/comment"),
     middleware = require("../middleware");
