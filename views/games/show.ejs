@@ -20,6 +20,7 @@
                     <p class = "card-text"><%= game.description %></p>
                     <p class = "card-text"><em>Submitted by <%= game.author.username %></em></p>
                     
+                    <!-- GAME MODIFY BUTTONS -->
                     <% if(currentUser && game.author.id.equals(currentUser._id)){ %>
                         <a class = "btn btn-sm btn-warning card-link" href="/games/<%= game._id %>/edit">Edit</a>
                         <form class = "d-inline-flex" action = "/games/<%= game._id %>?_method=DELETE" method = "POST">
@@ -42,6 +43,7 @@
                                 <%= comment.created.toDateString() %>
                             </div>
 
+                            
                             <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
                                 <a href="/games/<%= game._id %>/comments/<%= comment._id %>/edit" class="btn btn-sm btn-warning card-link">
                                     Edit

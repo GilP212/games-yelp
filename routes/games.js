@@ -77,8 +77,9 @@ router.put("/:id", middleware.checkGameOwnership, function(req, res){
 });
 
 //DESTROY - Deletes a game from the DB.
-router.delete("/:id", middleware.checkGameOwnership, function(req, res){
-    Game.findOneAndDelete(req.params.id, function(err, game){
+router.delete("/:id", middleware.checkGameOwnership, function(req, res){    
+    Game.findByIdAndDelete({_id: req.params.id}, function(err, game){
+        console.log(game);
         if(err){
             console.log(err);
         } else {
