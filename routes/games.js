@@ -1,6 +1,7 @@
 //EXTERNAL MODULES
-var express = require("express");
-    router  = express.Router();
+var express = require("express"),
+    router  = express.Router(),
+    util = require("util");
 
 //LOCAL MODULES
 var Game       = require("../models/game"),
@@ -8,8 +9,8 @@ var Game       = require("../models/game"),
     middleware = require("../middleware");
 
 //INDEX - show all games
-router.get("/", function(req, res){
-    Game.find({}, function(err, games){
+router.get("/", function renderGamesIndex(req, res, next){
+    Game.find({}, function getAllGames(err, games){
         if(err){
             console.log(err);
         } else {
@@ -79,7 +80,6 @@ router.put("/:id", middleware.checkGameOwnership, function(req, res){
 //DESTROY - Deletes a game from the DB.
 router.delete("/:id", middleware.checkGameOwnership, function(req, res){    
     Game.findByIdAndDelete({_id: req.params.id}, function(err, game){
-        console.log(game);
         if(err){
             console.log(err);
         } else {

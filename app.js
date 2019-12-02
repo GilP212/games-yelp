@@ -9,8 +9,7 @@ var express        = require("express"),
     methodOverride = require("method-override");
 
 //LOCAL MODULES
-var User    = require("./models/user"),
-    seedDB  = require("./seeds");
+var User = require("./models/user");
 
 //APP CONFIG
 app.use(express.static(__dirname + "/public"));
@@ -23,7 +22,6 @@ app.use(flash());
 mongoose.set('useFindAndModify', false);
 mongoose.set('useUnifiedTopology', true);
 mongoose.connect("mongodb://localhost/games_yelp", {useNewUrlParser: true});
-//seedDB();
 
 //PASSPORT CONFIG
 app.use(require("express-session")({
