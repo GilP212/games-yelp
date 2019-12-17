@@ -21,7 +21,7 @@ app.use(flash());
 //DB SETUP
 mongoose.set('useFindAndModify', false);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect("mongodb://localhost/games_yelp", {useNewUrlParser: true});
+mongoose.connect("mongodb+srv://dagil123:gilp7466@cluster0-ox8cv.mongodb.net/test?retryWrites=true&w=majority", {useNewUrlParser: true});
 
 //PASSPORT CONFIG
 app.use(require("express-session")({
@@ -54,6 +54,10 @@ app.use("/games", gameRoutes);
 app.use("/games/:id/comments", commentRoutes);
 
 //PORT
-app.listen(3000, function(){
+var port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+app.listen(port, function(){
     console.log("Server has started.");
 });
